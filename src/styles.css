@@ -1,3 +1,1044 @@
+/* ── Frutiger Aero — Red Semántica (Optimizado) ── */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap');
+
+:root {
+  --font-main: 'Nunito', 'Segoe UI', sans-serif;
+  --bg-sky: linear-gradient(175deg, #0860a8 0%, #1090d0 20%, #18b0e8 45%, #38cef0 65%, #70e4f5 82%, #9aeece 100%);
+  --mask-hill: linear-gradient(to top, #000 25%, transparent 100%);
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --text-white: #ffffff;
+  --accent-cyan: #00f2ff;
+  --accent-green: #3cf08c;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  font-family: 'Arial';
+  font-family: var(--font-main);
+  min-height: 100vh;
+  /* Capas de fondo: nubes, sol, resplandor verde, cielo + PROFUNDIDAD AURORA */
+  background:
+    radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.4), transparent 50%),
+    radial-gradient(ellipse at 20% 10%, rgba(255, 255, 255, 0.45), transparent 50%),
+    radial-gradient(circle at 80% 15%, rgba(0, 242, 255, 0.35), transparent 45%),
+    radial-gradient(ellipse at bottom left, rgba(60, 240, 140, 0.5), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(0, 150, 255, 0.45), transparent 60%),
+    linear-gradient(175deg, #054a91 0%, #1090d0 30%, #38cef0 70%, #9aeece 100%);
+  background-attachment: fixed;
+  color: var(--text-white);
+  padding-bottom: 120px;
+  overflow-x: hidden;
+}
+
+/* ── Decoración Global (Fixed) ── */
+body::before,
+body::after,
+#contenedor-principal::before,
+#contenedor-principal::after,
+h1::after,
+footer::before,
+h1::before,
+footer::after {
+  content: '';
+  position: fixed;
+  pointer-events: none;
+}
+
+.light-streak,
+.sticker {
+  position: fixed;
+  pointer-events: none;
+}
+
+.light-streak {
+  width: 150%;
+  height: 60px;
+  /* Mas grueso para que se note el degradado */
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0) 20%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 80%,
+      transparent);
+  left: -25%;
+  top: 20%;
+  transform: rotate(-35deg);
+  z-index: 2;
+  animation: sweep 15s infinite ease-in-out;
+  opacity: 0.3;
+  filter: blur(10px);
+}
+
+@keyframes sweep {
+  0% {
+    transform: translate(-50%, -50%) rotate(-35deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.3;
+  }
+
+  90% {
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translate(50%, 50%) rotate(-35deg);
+    opacity: 0;
+  }
+}
+
+/* ── Elementos del Cielo HD ── */
+.sky-elements {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  /* Un poco mas arriba de la base */
+  pointer-events: none;
+}
+
+.sun-flare {
+  position: absolute;
+  top: -150px;
+  right: -150px;
+  width: 800px;
+  /* Mas grande */
+  height: 800px;
+  background: radial-gradient(circle,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 250, 200, 0.6) 15%,
+      rgba(0, 242, 255, 0.3) 40%,
+      transparent 75%);
+  filter: blur(20px);
+  /* Menos desenfoque para que se note mas el centro */
+  z-index: 0;
+  opacity: 0.9;
+  /* Mas opaco */
+}
+
+/* Destellos circulares del lente */
+.sun-flare::after {
+  content: '';
+  position: absolute;
+  top: 500px;
+  right: 600px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent 70%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  box-shadow: -250px 200px 0 -50px rgba(0, 242, 255, 0.3), -450px 350px 0 -80px rgba(255, 255, 255, 0.4);
+}
+
+.cloud {
+  position: absolute;
+  background: radial-gradient(ellipse at center,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 85%);
+  filter: blur(30px);
+  /* Menos desenfoque */
+  opacity: 0.8;
+  /* Mas opaco (era 0.6) */
+  border-radius: 50%;
+  animation: moveClouds linear infinite;
+}
+
+.cloud-1 {
+  width: 600px;
+  height: 200px;
+  top: 10%;
+  left: -200px;
+  animation-duration: 120s;
+}
+
+.cloud-2 {
+  width: 800px;
+  height: 250px;
+  top: 40%;
+  right: -300px;
+  animation-duration: 180s;
+  animation-direction: reverse;
+}
+
+.cloud-3 {
+  width: 500px;
+  height: 180px;
+  bottom: 10%;
+  left: 10%;
+  animation-duration: 150s;
+  opacity: 0.4;
+}
+
+@keyframes moveClouds {
+  from {
+    transform: translateX(-100px);
+  }
+
+  to {
+    transform: translateX(100vw);
+  }
+}
+
+/* ── Malla Tecnológica ── */
+.tech-overlay {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.5;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
+  mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
+}
+
+/* ── Stickers Decorativos ── */
+.stickers-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sticker.computer {
+  top: 15%;
+  left: 5%;
+  width: 160px;
+  height: 160px;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Crystal_Clear_device_computer.png/256px-Crystal_Clear_device_computer.png') center/contain no-repeat;
+  filter: drop-shadow(0 20px 40px rgba(0, 160, 255, 0.4));
+  animation: floatOrb 10s ease-in-out infinite alternate;
+  opacity: 0.85;
+}
+
+.sticker.star-1 {
+  top: 12%;
+  right: 18%;
+  width: 100px;
+  height: 100px;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Crystal_Clear_action_bookmark.png/256px-Crystal_Clear_action_bookmark.png') center/contain no-repeat;
+  filter: drop-shadow(0 0 30px rgba(255, 230, 0, 0.5));
+  animation: floatOrb 6s ease-in-out infinite alternate-reverse;
+  opacity: 0.75;
+}
+
+.sticker.star-2 {
+  bottom: 25%;
+  right: 12%;
+  width: 75px;
+  height: 75px;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Crystal_Clear_action_apply.png/256px-Crystal_Clear_action_apply.png') center/contain no-repeat;
+  filter: hue-rotate(180deg) drop-shadow(0 0 20px rgba(0, 242, 255, 0.5));
+  animation: floatOrb 8s ease-in-out infinite alternate;
+  opacity: 0.65;
+}
+
+.sticker.clover {
+  bottom: 12%;
+  left: 10%;
+  width: 140px;
+  height: 140px;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Crystal_Clear_app_kspread.png/256px-Crystal_Clear_app_kspread.png') center/contain no-repeat;
+  filter: drop-shadow(0 15px 35px rgba(50, 255, 100, 0.4));
+  animation: floatOrb 12s ease-in-out infinite linear alternate;
+  opacity: 0.85;
+}
+
+.sticker.folder {
+  top: 35%;
+  right: 6%;
+  width: 120px;
+  height: 120px;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Crystal_Clear_app_kfm_home.png/256px-Crystal_Clear_app_kfm_home.png') center/contain no-repeat;
+  filter: drop-shadow(0 12px 28px rgba(0, 120, 240, 0.4));
+  animation: floatOrb 9s ease-in-out infinite alternate-reverse;
+  opacity: 0.75;
+}
+
+
+
+/* ── Orbes 3D Frutiger ── */
+.orbs-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1) 60%);
+  box-shadow:
+    inset -10px -10px 30px rgba(0, 100, 200, 0.2),
+    inset 10px 10px 30px rgba(255, 255, 255, 0.6),
+    0 20px 40px rgba(0, 50, 150, 0.15);
+  backdrop-filter: blur(2px);
+  animation: floatOrb 15s ease-in-out infinite alternate;
+}
+
+.orb-1 {
+  width: 180px;
+  height: 180px;
+  top: 10%;
+  right: 10%;
+  animation-duration: 20s;
+}
+
+.orb-2 {
+  width: 120px;
+  height: 120px;
+  bottom: 15%;
+  left: 5%;
+  animation-delay: -5s;
+}
+
+.orb-3 {
+  width: 60px;
+  height: 60px;
+  top: 40%;
+  left: 15%;
+  animation-duration: 12s;
+}
+
+.orb-4 {
+  width: 90px;
+  height: 90px;
+  bottom: 35%;
+  right: 20%;
+  animation-delay: -8s;
+}
+
+.orb-5 {
+  width: 220px;
+  height: 220px;
+  top: -50px;
+  left: -50px;
+  opacity: 0.3;
+}
+
+/* ── Capa de Lluvia (Falling) ── */
+.falling-container {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  /* Encima del fondo pero detras de las tarjetas si es necesario, o al frente para maximo impacto */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.falling-item {
+  position: absolute;
+  top: -100px;
+  animation: caida 7s linear infinite;
+  /* Mas rapido (era 12s) */
+}
+
+.falling-item.bubble {
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+.falling-item.leaf {
+  width: 30px;
+  height: 15px;
+  background: linear-gradient(135deg, rgba(60, 240, 140, 0.8), rgba(20, 180, 90, 0.4));
+  border-radius: 50% 10% 50% 10%;
+  box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.3);
+  animation: caida 8s linear infinite, balanceo 3s ease-in-out infinite alternate;
+  /* Mas rapido (era 15s/4s) */
+}
+
+/* Variaciones EXTREMAS para romper la linea horizontal */
+.leaf-1 {
+  left: 5%;
+  top: -20vh;
+  animation-delay: -3s;
+  animation-duration: 9s;
+  transform: rotate(10deg);
+}
+
+.leaf-2 {
+  left: 85%;
+  top: -50vh;
+  animation-delay: -12s;
+  animation-duration: 7s;
+  transform: rotate(45deg);
+}
+
+.leaf-3 {
+  left: 25%;
+  top: -80vh;
+  animation-delay: -5s;
+  animation-duration: 10s;
+  transform: rotate(-15deg);
+}
+
+.leaf-4 {
+  left: 65%;
+  top: -10vh;
+  animation-delay: -18s;
+  animation-duration: 8s;
+  transform: rotate(30deg);
+}
+
+.leaf-5 {
+  left: 45%;
+  top: -40vh;
+  animation-delay: -8s;
+  animation-duration: 11s;
+  transform: rotate(-40deg);
+}
+
+.leaf-6 {
+  left: 15%;
+  top: -70vh;
+  animation-delay: -14s;
+  animation-duration: 9.5s;
+  transform: rotate(20deg);
+}
+
+.leaf-7 {
+  left: 75%;
+  top: -30vh;
+  animation-delay: -2s;
+  animation-duration: 7.5s;
+  transform: rotate(150deg);
+}
+
+.leaf-8 {
+  left: 35%;
+  top: -90vh;
+  animation-delay: -22s;
+  animation-duration: 12s;
+  transform: rotate(60deg);
+}
+
+.leaf-9 {
+  left: 95%;
+  top: -15vh;
+  animation-delay: -6s;
+  animation-duration: 6.5s;
+  transform: rotate(-10deg);
+}
+
+.leaf-10 {
+  left: 55%;
+  top: -55vh;
+  animation-delay: -16s;
+  animation-duration: 8.2s;
+  transform: rotate(250deg);
+}
+
+.leaf-11 {
+  left: 2%;
+  top: -25vh;
+  animation-delay: -20s;
+  animation-duration: 9s;
+  transform: rotate(-5deg);
+}
+
+.leaf-12 {
+  left: 52%;
+  top: -65vh;
+  animation-delay: -4s;
+  animation-duration: 7.8s;
+  transform: rotate(120deg);
+}
+
+.leaf-13 {
+  left: 82%;
+  top: -85vh;
+  animation-delay: -10s;
+  animation-duration: 10.5s;
+  transform: rotate(40deg);
+}
+
+.leaf-14 {
+  left: 18%;
+  top: -35vh;
+  animation-delay: -24s;
+  animation-duration: 6.2s;
+  transform: rotate(-15deg);
+}
+
+.leaf-15 {
+  left: 48%;
+  top: -75vh;
+  animation-delay: -1.5s;
+  animation-duration: 8.8s;
+  transform: rotate(200deg);
+}
+
+.leaf-16 {
+  left: 72%;
+  top: -45vh;
+  animation-delay: -13s;
+  animation-duration: 9.2s;
+  transform: rotate(20deg);
+}
+
+.leaf-17 {
+  left: 32%;
+  top: -95vh;
+  animation-delay: -7s;
+  animation-duration: 7.4s;
+  transform: rotate(-45deg);
+}
+
+.leaf-18 {
+  left: 92%;
+  top: -5vh;
+  animation-delay: -19s;
+  animation-duration: 11.5s;
+  transform: rotate(350deg);
+}
+
+.leaf-19 {
+  left: 10%;
+  top: -60vh;
+  animation-delay: -11s;
+  animation-duration: 6.9s;
+  transform: rotate(-25deg);
+}
+
+.leaf-20 {
+  left: 60%;
+  top: -20vh;
+  animation-delay: -28s;
+  animation-duration: 10.2s;
+  transform: rotate(100deg);
+}
+
+.bubble-1 {
+  left: 2%;
+  top: -10vh;
+  animation-delay: -1s;
+  width: 12px;
+  height: 12px;
+  animation-duration: 6s;
+}
+
+.bubble-2 {
+  left: 48%;
+  top: -60vh;
+  animation-delay: -4s;
+  width: 22px;
+  height: 22px;
+  animation-duration: 7.5s;
+}
+
+.bubble-3 {
+  left: 14%;
+  top: -30vh;
+  animation-delay: -2s;
+  width: 18px;
+  height: 18px;
+  animation-duration: 6.8s;
+}
+
+.bubble-4 {
+  left: 82%;
+  top: -70vh;
+  animation-delay: -6s;
+  width: 15px;
+  height: 15px;
+  animation-duration: 5.5s;
+}
+
+.bubble-5 {
+  left: 35%;
+  top: -20vh;
+  animation-delay: -3s;
+  width: 25px;
+  height: 25px;
+  animation-duration: 8s;
+}
+
+.bubble-6 {
+  left: 68%;
+  top: -80vh;
+  animation-delay: -0.4s;
+  width: 14px;
+  height: 14px;
+  animation-duration: 7.2s;
+}
+
+.bubble-7 {
+  left: 24%;
+  top: -40vh;
+  animation-delay: -5s;
+  width: 10px;
+  height: 10px;
+  animation-duration: 6.3s;
+}
+
+.bubble-8 {
+  left: 58%;
+  top: -90vh;
+  animation-delay: -2s;
+  width: 30px;
+  height: 30px;
+  animation-duration: 9s;
+}
+
+.bubble-9 {
+  left: 8%;
+  top: -15vh;
+  animation-delay: -1.8s;
+  width: 14px;
+  height: 14px;
+  animation-duration: 7s;
+}
+
+.bubble-10 {
+  left: 97%;
+  top: -55vh;
+  animation-delay: -4s;
+  width: 20px;
+  height: 20px;
+  animation-duration: 6.5s;
+}
+
+.bubble-11 {
+  left: 45%;
+  top: -25vh;
+  animation-delay: -0.9s;
+  width: 16px;
+  height: 16px;
+  animation-duration: 5.8s;
+}
+
+.bubble-12 {
+  left: 74%;
+  top: -65vh;
+  animation-delay: -3.5s;
+  width: 24px;
+  height: 24px;
+  animation-duration: 7.7s;
+}
+
+@keyframes caida {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.8;
+  }
+
+  90% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes balanceo {
+  from {
+    margin-left: -20px;
+  }
+
+  to {
+    margin-left: 20px;
+  }
+}
+
+/* ── Brillo Vista (Aero Gloss) ── */
+.vista-gloss {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 60%, transparent 100%);
+  border-radius: 20px 20px 0 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+body::before {
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+  background-size: 38px 38px;
+  z-index: 0;
+}
+
+/* Pasto Inferior */
+body::after {
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  height: 110px;
+  background: url('../img/grass-strip.svg') repeat-x bottom/auto 100%;
+  z-index: -1;
+  opacity: 0.9;
+  -webkit-mask-image: var(--mask-hill);
+  mask-image: var(--mask-hill);
+}
+
+/* Orbe Naturaleza (Izq) */
+#contenedor-principal::before {
+  bottom: 50px;
+  left: -55px;
+  width: 240px;
+  height: 240px;
+  background: url('../img/orb-nature.svg') center/contain no-repeat;
+  filter: drop-shadow(0 0 24px rgba(50, 200, 100, 0.5));
+  z-index: 1;
+  animation: floatOrb 7s ease-in-out infinite alternate;
+}
+
+/* HUD Ring (Der) */
+#contenedor-principal::after {
+  top: -30px;
+  right: -30px;
+  width: 220px;
+  height: 220px;
+  background: url('../img/hud-ring.svg') center/contain no-repeat;
+  filter: drop-shadow(0 0 18px rgba(0, 210, 255, 0.45));
+  z-index: 1;
+  animation: spinHud 24s linear infinite;
+}
+
+/* Persona Azul (Flotante) */
+h1::after {
+  bottom: 68px;
+  right: 32px;
+  width: 80px;
+  height: 110px;
+  background: url('../img/icon-person.svg') center/contain no-repeat;
+  filter: drop-shadow(0 4px 14px rgba(0, 120, 220, 0.55));
+  z-index: 1;
+  animation: floatOrb 6s ease-in-out infinite alternate-reverse;
+}
+
+/* Gota Agua (Flotante) */
+footer::before {
+  bottom: 68px;
+  left: 36px;
+  width: 50px;
+  height: 70px;
+  background: url('../img/icon-drop.svg') center/contain no-repeat;
+  filter: drop-shadow(0 4px 12px rgba(0, 160, 240, 0.6));
+  z-index: 1;
+  animation: floatOrb 5s ease-in-out infinite alternate;
+}
+
+/* ── Partículas de Luz (Bokeh) ── */
+h1::before,
+footer::after {
+  top: 100vh;
+  left: 0;
+  width: 140px;
+  /* Mas grandes y desenfocados */
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+  z-index: 0;
+  animation: burbujas 18s linear infinite;
+  filter: blur(40px);
+  box-shadow:
+    10vw -10vh 0 0 rgba(255, 255, 255, 0.1),
+    30vw -40vh 0 0 rgba(0, 242, 255, 0.1),
+    60vw -70vh 0 0 rgba(60, 240, 140, 0.1),
+    85vw -20vh 0 0 rgba(255, 255, 255, 0.1);
+}
+
+footer::after {
+  animation-delay: -9s;
+  width: 200px;
+  height: 200px;
+  filter: blur(60px);
+}
+
+
+@keyframes floatOrb {
+  from {
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    transform: translateY(-14px) scale(1.04);
+  }
+}
+
+@keyframes spinHud {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes burbujas {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+
+/* ── Estructura ── */
+h1 {
+  text-align: center;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 800;
+  padding: 44px 20px 32px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 12px rgba(0, 60, 140, 0.5), 0 0 30px rgba(80, 210, 255, 0.4);
+  position: relative;
+  z-index: 1;
+}
+
+#contenedor-principal {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+  z-index: 5;
+  /* Asegurar que esten por encima de los stickers decorativos */
+}
+
+/* ── Tarjetas ── */
+article {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow:
+    0 8px 32px rgba(0, 40, 100, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 0 0 1px rgba(0, 242, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decoración Tarjeta (Gloss & Esquina) */
+article::before,
+article::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+article::before {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 60%, transparent 100%);
+  border-radius: 20px 20px 0 0;
+  z-index: 2;
+  /* Encima de todo en la tarjeta */
+}
+
+article::after {
+  bottom: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  border-top: 2px solid rgba(0, 242, 255, 0.6);
+  border-left: 2px solid rgba(0, 242, 255, 0.6);
+  background: radial-gradient(circle at bottom right, rgba(0, 242, 255, 0.1), transparent 70%);
+  border-radius: 40px 0 0 0;
+}
+
+article:hover {
+  transform: translateY(-8px) scale(1.02);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 20px 50px rgba(0, 100, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 0 30px rgba(0, 242, 255, 0.3);
+}
+
+/* Texto & Elementos Internos */
+article h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgba(0, 50, 130, 0.5);
+}
+
+article h2::before {
+  content: '💡 ';
+}
+
+article h4 {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 5px 14px;
+  border-radius: 99px;
+  width: fit-content;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(140, 230, 180, 0.5) 50%, rgba(20, 180, 90, 0.6) 100%);
+  color: #034a1e;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow: 0 3px 10px rgba(0, 140, 60, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+article h4::before {
+  content: '🌱';
+  font-size: 0.95em;
+}
+
+article p {
+  font-size: 0.87rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  flex: 1;
+}
+
+article img {
+  width: 100%;
+  height: 155px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 14px rgba(0, 70, 180, 0.3);
+  margin-top: auto;
+  display: block;
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.8rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Reproductor de Audio Aero ── */
+.audio-player-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+}
+
+.glass-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 10px 25px rgba(0, 100, 255, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, transparent 100%);
+  border-radius: 50% 50% 0 0;
+}
+
+.glass-btn .icon {
+  font-size: 24px;
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 150, 255, 0.8);
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.glass-btn:hover {
+  transform: scale(1.15) rotate(5deg);
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 150, 255, 0.5);
+}
+
+.glass-btn:active {
+  transform: scale(0.95);
+}
+
+.glass-btn.playing {
+  animation: pulseGlow 2s infinite;
+  border-color: rgba(0, 255, 255, 0.6);
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 20px rgba(0, 242, 255, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 242, 255, 0);
+  }
+}
+
+@media (max-width: 600px) {
+  #contenedor-principal {
+    padding: 0 14px;
+    gap: 16px;
+  }
+
+  h1 {
+    padding: 28px 14px 20px;
+  }
+
+  .audio-player-container {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .glass-btn {
+    width: 50px;
+    height: 50px;
+  }
 }

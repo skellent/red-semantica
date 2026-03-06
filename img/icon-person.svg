@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160">
+  <defs>
+    <radialGradient id="bodyGrad" cx="40%" cy="30%" r="70%">
+      <stop offset="0%"   stop-color="#a0e4ff"/>
+      <stop offset="45%"  stop-color="#28a8e0"/>
+      <stop offset="100%" stop-color="#0060b0"/>
+    </radialGradient>
+    <radialGradient id="headGrad" cx="38%" cy="30%" r="65%">
+      <stop offset="0%"   stop-color="#c8f0ff"/>
+      <stop offset="50%"  stop-color="#38b8f0"/>
+      <stop offset="100%" stop-color="#0070c0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Sombra -->
+  <ellipse cx="60" cy="155" rx="38" ry="6" fill="rgba(0,80,160,0.20)"/>
+
+  <!-- Cuerpo — silueta Frutiger Aero -->
+  <path d="M20,155 Q20,100 40,90 L80,90 Q100,100 100,155 Z"
+        fill="url(#bodyGrad)" filter="url(#glow)"/>
+  <!-- brillo cuerpo -->
+  <path d="M30,100 Q40,92 60,91 Q50,95 38,108 Z"
+        fill="rgba(255,255,255,0.45)"/>
+
+  <!-- Cuello -->
+  <rect x="48" y="70" width="24" height="22" rx="8"
+        fill="url(#headGrad)"/>
+
+  <!-- Cabeza -->
+  <circle cx="60" cy="52" r="28"
+          fill="url(#headGrad)" filter="url(#glow)"/>
+  <!-- brillo cabeza -->
+  <ellipse cx="50" cy="40" rx="14" ry="9"
+           fill="rgba(255,255,255,0.50)" transform="rotate(-15,50,40)"/>
+
+  <!-- Contorno sutil -->
+  <circle cx="60" cy="52" r="28"
+          fill="none" stroke="rgba(255,255,255,0.40)" stroke-width="1.5"/>
+  <path d="M20,155 Q20,100 40,90 L80,90 Q100,100 100,155 Z"
+        fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+</svg>

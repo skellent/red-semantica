@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140">
+  <defs>
+    <radialGradient id="dropGrad" cx="36%" cy="28%" r="72%">
+      <stop offset="0%"   stop-color="#ccf5ff"/>
+      <stop offset="40%"  stop-color="#30c8f0"/>
+      <stop offset="100%" stop-color="#0060b8"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Gota de agua 3D -->
+  <path d="M50,8 C50,8 10,65 10,88 A40,40 0 0 0 90,88 C90,65 50,8 50,8 Z"
+        fill="url(#dropGrad)" filter="url(#glow)"
+        stroke="rgba(255,255,255,0.50)" stroke-width="1.5"/>
+
+  <!-- Brillo izquierdo superior -->
+  <path d="M34,42 C30,55 28,70 32,80 Q26,65 34,42 Z"
+        fill="rgba(255,255,255,0.55)"/>
+
+  <!-- Reflejo pequeño -->
+  <ellipse cx="38" cy="38" rx="8" ry="14"
+           fill="rgba(255,255,255,0.40)" transform="rotate(-20,38,38)"/>
+
+  <!-- Burbuja interna -->
+  <circle cx="65" cy="90" r="6"
+          fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.45)" stroke-width="1"/>
+</svg>

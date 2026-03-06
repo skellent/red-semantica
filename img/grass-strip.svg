@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="hillGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#6df58a" stop-opacity="0.9"/>
+      <stop offset="30%"  stop-color="#28d462" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#0e7a33" stop-opacity="1"/>
+    </linearGradient>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Colina suave de fondo -->
+  <path d="M0,100 C100,20 300,20 400,100 Z" fill="url(#hillGrad)" opacity="0.6" filter="url(#softGlow)" />
+
+  <!-- Briznas de hierba más suaves y redondeadas -->
+  <g fill="url(#hillGrad)" filter="url(#softGlow)">
+    <path d="M10,100 Q15,40 20,100 Z" />
+    <path d="M40,100 Q50,30 60,100 Z" />
+    <path d="M85,100 Q95,50 105,100 Z" />
+    <path d="M130,100 Q145,20 160,100 Z" />
+    <path d="M190,100 Q205,45 220,100 Z" />
+    <path d="M250,100 Q270,35 290,100 Z" />
+    <path d="M320,100 Q340,55 360,100 Z" />
+    <path d="M370,100 Q385,40 400,100 Z" />
+  </g>
+
+  <!-- Reflejos Glossy en la parte superior de la colina -->
+  <path d="M20,60 Q200,10 380,60" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4" stroke-linecap="round" filter="url(#softGlow)" />
+</svg>
