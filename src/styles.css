@@ -923,6 +923,7 @@ article p {
   font-size: 0.87rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.502);
   flex: 1;
 }
 
@@ -935,6 +936,7 @@ article img {
   box-shadow: 0 4px 14px rgba(0, 70, 180, 0.3);
   margin-top: auto;
   display: block;
+  transition: height 0.4s ease, width 0.4s ease;
 }
 
 footer {
